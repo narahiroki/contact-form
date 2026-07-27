@@ -25,4 +25,26 @@ class Contact extends Model
         'body',
         'status',
     ];
+
+    /**
+     * ステータスの選択肢（値 => 表示ラベル）
+     *
+     * @return array<string, string>
+     */
+    public static function statusOptions(): array
+    {
+        return [
+            self::STATUS_NEW => '新規',
+            self::STATUS_IN_PROGRESS => '対応中',
+            self::STATUS_RESOLVED => '解決済み',
+        ];
+    }
+
+    /**
+     * 現在のステータスの表示ラベル
+     */
+    public function statusLabel(): string
+    {
+        return self::statusOptions()[$this->status] ?? $this->status;
+    }
 }
